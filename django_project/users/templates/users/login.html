@@ -1,0 +1,34 @@
+{%  extends "blog/base.html" %}
+{% load socialaccount %}
+{% providers_media_js %}
+{% load crispy_forms_tags %}
+{% block content %}
+   <div class="content-section">
+       <form  method="POST">
+           {% csrf_token %}
+           <fieldset class="from-group">
+               <legend class="border-bottom mb-4">Log In</legend>
+           {{ form|crispy }}
+           </fieldset>
+           <div class="form_group">
+               <button class="btn btn-outline-info" type="submit">Login</button>
+               <small class="text-muted ml-2">
+                   <a href="{% url 'password_reset' %}">Frogot Password?</a>
+               </small>
+           </div>
+           <small class="text-muted ml-2" align="center">
+                    <h6>Login With</h6>
+
+           <div class="form_group" align="center">
+                <a  class="btn btn-outline-info" href="{% url 'social:begin' 'facebook' %}">Facebook</a>
+                  <a class="btn btn-outline-info ml-2" href="{% provider_login_url "google"  %}">Google</a>
+           </div>
+                </small>
+       </form>
+       <div class="border-top pt-3">
+           <small class="text-muted">
+              Create An Account? <a class="ml-2" href="{% url 'register' %}">Sign Up</a>
+           </small>
+       </div>
+   </div>
+{% endblock %}
